@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Factos del Mundo Actual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Estilos Base y Reset --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(135deg, #050505, #333333);
+            font-family: 'Montserrat', sans-serif;
+            color: #f0f0f0; /* Color base de texto un poco más claro */
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px; /* Un poco más de padding */
+            padding-bottom: 70px; /* Espacio para el footer */
+            position: relative;
+        }
+
+        /* --- Título --- */
+        h1 {
+            margin-bottom: 35px; /* Más espacio */
+            color: #d4af37;
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+            font-weight: 700;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            text-align: center;
+        }
+
+        /* --- Opciones/Botones --- */
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .option {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border-radius: 12px;
+            padding: 18px 25px;
+            width: 100%;
+            min-width: 280px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(212, 175, 55, 0.3);
+            color: #e0ca85;
+            font-size: clamp(1.2rem, 4vw, 1.4rem);
+            font-weight: 600;
+            user-select: none;
+            border: 1.5px solid #555;
+        }
+
+        .option:hover {
+            transform: scale(1.03) translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.6);
+            border-color: #d4af37;
+            color: #ffffff;
+        }
+
+        /* --- Mensaje/Facto --- */
+        .message {
+            margin-top: 35px; /* Más separación */
+            padding: 25px;
+            background: rgba(30, 30, 30, 0.85);
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+            color: #f0f0f0;
+            font-size: clamp(1rem, 3.5vw, 1.15rem);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid #d4af37;
+            backdrop-filter: blur(4px);
+            line-height: 1.6;
+
+            /* Estilos iniciales para animación usando visibility */
+            opacity: 0;
+            transform: translateY(15px);
+            visibility: hidden; /* Oculto pero permite transiciones */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0s linear 0.4s;
+            /* El delay en visibility asegura que no desaparezca hasta que termine la opacidad */
+        }
+
+        /* Clase para activar la animación */
+         .message.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible; /* Lo hace visible */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            /* No se necesita transition para visibility al mostrar */
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 12px 0;
+            background-color: rgba(10, 10, 10, 0.7);
+            color: #aaa;
+            font-size: 0.85rem;
+            font-weight: 400;
+            font-family: Arial, sans-serif;
+             backdrop-filter: blur(3px);
+             z-index: 10;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Factos el Gerard</h1>
+
+    <div class="options">
+        <div class="option" onclick="showFact(1)">Facto 1: Aprovecha</div>
+        <div class="option" onclick="showFact(2)">Facto 2: Así mismo</div>
+        <div class="option" onclick="showFact(3)">Facto 3: Tomando agua</div>
+    </div>
+
+    <div class="message" id="factMessage">
+        </div>
+
+    <footer>
+        © 2025 Desarrollado por Gerardo Rondón
+    </footer>
+
+    <script>
+        const messageElement = document.getElementById('factMessage');
+
+        function showFact(option) {
+            let message = '';
+
+            // Determinar el mensaje basado en la opción
+            switch(option) {
+                case 1:
+                    message = "Bueno mano, tu sabes que tienes que aprovechar. Si el mundo es un libro, ¿por qué leer una sola página? 🤔.";
+                    break;
+                case 2:
+                    message = "Lo que destaca por su hermosura se presenta como una experiencia singular, las tetas de Juana son algo muy excepcional.";
+                    break;
+                case 3:
+                    message = "Te aman te mienten, te lo lustran y después como siempre, en cada lustrada, en cada recordar. Lleva la despedida como destino final.";
+                    break;
+                default:
+                    message = "Selecciona una opción para ver un facto.";
+            }
+
+            // 1. Actualizar el contenido del texto
+            messageElement.textContent = message;
+
+            // 2. Asegurar que la animación pueda ejecutarse
+            // Quitamos 'visible' para resetear el estado si ya estaba visible
+            messageElement.classList.remove('visible');
+
+            // Forzar al navegador a reconocer el estado "oculto" antes de volver a mostrarlo.
+            // void messageElement.offsetWidth; // Truco de Reflow (a veces necesario)
+
+            // 3. Añadir la clase 'visible' para iniciar la animación.
+            // Usamos un pequeño timeout para asegurar que el paso 2 se complete.
+            setTimeout(() => {
+                messageElement.classList.add('visible');
+            }, 10); // Un delay muy corto es usualmente suficiente
+        }
+    </script>
+
+</body>
+</html>
