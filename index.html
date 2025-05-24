@@ -1,191 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>Factos del Mundo Actual</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelota 3D con Pesos</title>
     <style>
-        /* --- Estilos Base y Reset --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            height: 100%;
-        }
-
         body {
-            min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(135deg, #050505, #333333);
-            font-family: 'Montserrat', sans-serif;
-            color: #f0f0f0; /* Color base de texto un poco más claro */
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 25px; /* Un poco más de padding */
-            padding-bottom: 70px; /* Espacio para el footer */
-            position: relative;
-        }
-
-        /* --- Título --- */
-        h1 {
-            margin-bottom: 35px; /* Más espacio */
-            color: #d4af37;
-            text-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
-            font-weight: 700;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            text-align: center;
-        }
-
-        /* --- Opciones/Botones --- */
-        .options {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .option {
-            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
-            border-radius: 12px;
-            padding: 18px 25px;
-            width: 100%;
-            min-width: 280px;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(212, 175, 55, 0.3);
-            color: #e0ca85;
-            font-size: clamp(1.2rem, 4vw, 1.4rem);
-            font-weight: 600;
-            user-select: none;
-            border: 1.5px solid #555;
-        }
-
-        .option:hover {
-            transform: scale(1.03) translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.6);
-            border-color: #d4af37;
-            color: #ffffff;
-        }
-
-        /* --- Mensaje/Facto --- */
-        .message {
-            margin-top: 35px; /* Más separación */
-            padding: 25px;
-            background: rgba(30, 30, 30, 0.85);
-            border-radius: 12px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-            color: #f0f0f0;
-            font-size: clamp(1rem, 3.5vw, 1.15rem);
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            border: 1px solid #d4af37;
-            backdrop-filter: blur(4px);
-            line-height: 1.6;
-
-            /* Estilos iniciales para animación usando visibility */
-            opacity: 0;
-            transform: translateY(15px);
-            visibility: hidden; /* Oculto pero permite transiciones */
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out, visibility 0s linear 0.4s;
-            /* El delay en visibility asegura que no desaparezca hasta que termine la opacidad */
-        }
-
-        /* Clase para activar la animación */
-         .message.visible {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible; /* Lo hace visible */
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-            /* No se necesita transition para visibility al mostrar */
-        }
-
-        /* --- Pie de Página --- */
-        footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            padding: 12px 0;
-            background-color: rgba(10, 10, 10, 0.7);
-            color: #aaa;
-            font-size: 0.85rem;
-            font-weight: 400;
+            background-color: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
-             backdrop-filter: blur(3px);
-             z-index: 10;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
         }
 
+        h1 {
+            font-size: 2rem;
+            text-shadow: 0 0 10px #0ff;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #1a1a1a;
+            color: #fff;
+            width: 100px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 20px;
+            background: #0ff;
+            color: #000;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #00cccc;
+        }
+
+        #canvas-container {
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            border: 2px solid #0ff;
+            display: none;
+        }
+
+        #message, #weights-list {
+            font-size: 1rem;
+            margin: 10px;
+            text-shadow: 0 0 5px #0ff;
+        }
     </style>
 </head>
 <body>
+    <h1>Registra tu peso</h1>
+    <input type="number" id="weight-input" placeholder="kg">
+    <button id="submit-btn">Enviar</button>
+    <button id="reset-btn">Reiniciar</button>
+    <div id="message"></div>
+    <div id="canvas-container"></div>
+    <div id="weights-list"></div>
 
-    <h1>Factos el Gerard</h1>
-
-    <div class="options">
-        <div class="option" onclick="showFact(1)">Facto 1: Aprovecha</div>
-        <div class="option" onclick="showFact(2)">Facto 2: Así mismo</div>
-        <div class="option" onclick="showFact(3)">Facto 3: Tomando agua</div>
-    </div>
-
-    <div class="message" id="factMessage">
-        </div>
-
-    <footer>
-        © 2025 Desarrollado por Gerardo Rondón
-    </footer>
-
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/FontLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/fonts/helvetiker_regular.typeface.json"></script>
     <script>
-        const messageElement = document.getElementById('factMessage');
+        // Configuración de Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 800 / 600, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const container = document.getElementById('canvas-container');
+        renderer.setSize(800, 600);
+        container.appendChild(renderer.domElement);
 
-        function showFact(option) {
-            let message = '';
+        // Esfera
+        const sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(1, 32, 32),
+            new THREE.MeshPhongMaterial({ color: 0x00ffff, shininess: 100 })
+        );
+        scene.add(sphere);
 
-            // Determinar el mensaje basado en la opción
-            switch(option) {
-                case 1:
-                    message = "Bueno mano, tu sabes que tienes que aprovechar. Si el mundo es un libro, ¿por qué leer una sola página? 🤔.";
-                    break;
-                case 2:
-                    message = "Lo que destaca por su hermosura se presenta como una experiencia singular, las tetas de Juana son algo muy excepcional.";
-                    break;
-                case 3:
-                    message = "Te aman te mienten, te lo lustran y después como siempre, en cada lustrada, en cada recordar. Lleva la despedida como destino final.";
-                    break;
-                default:
-                    message = "Selecciona una opción para ver un facto.";
+        // Iluminación
+        scene.add(new THREE.AmbientLight(0x404040, 0.5));
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        // Texto 3D
+        let textMesh;
+        new THREE.FontLoader().load('https://cdn.jsdelivr.net/npm/three@0.134.0/examples/fonts/helvetiker_regular.typeface.json', (font) => {
+            textMesh = new THREE.Mesh(
+                new THREE.TextGeometry('Jaipapa Guillermo', { font, size: 0.5, height: 0.1 }),
+                new THREE.MeshPhongMaterial({ color: 0x00ffff })
+            );
+            textMesh.position.set(-3, 0, -10);
+            scene.add(textMesh);
+        });
+
+        // Controles
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.minDistance = 2;
+        controls.maxDistance = 10;
+        camera.position.z = 5;
+
+        // Animación del texto
+        let textProgress = 0;
+        function animateText() {
+            if (textMesh && container.style.display !== 'none') {
+                if (textProgress < 1) {
+                    textProgress += 0.01;
+                    textMesh.position.z = -10 + textProgress * 8;
+                }
+            }
+        }
+
+        // Animación principal
+        function animate() {
+            requestAnimationFrame(animate);
+            animateText();
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Interactividad con localStorage
+        const weightInput = document.getElementById('weight-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const messageDiv = document.getElementById('message');
+        const weightsList = document.getElementById('weights-list');
+
+        submitBtn.addEventListener('click', () => {
+            const weight = parseFloat(weightInput.value);
+            if (isNaN(weight) || weight < 1) {
+                messageDiv.textContent = 'Ingresa un peso válido.';
+                container.style.display = 'none';
+                return;
             }
 
-            // 1. Actualizar el contenido del texto
-            messageElement.textContent = message;
+            // Guardar peso en localStorage
+            let weights = JSON.parse(localStorage.getItem('weights') || '[]');
+            weights.push({ id: weights.length + 1, weight });
+            localStorage.setItem('weights', JSON.stringify(weights));
 
-            // 2. Asegurar que la animación pueda ejecutarse
-            // Quitamos 'visible' para resetear el estado si ya estaba visible
-            messageElement.classList.remove('visible');
+            // Actualizar mensaje y mostrar pelota si > 60 kg
+            messageDiv.textContent = weight > 60 ? '¡Peso > 60 kg! Mostrando pelota 3D.' : `Peso ${weight} kg guardado.`;
+            container.style.display = weight > 60 ? 'block' : 'none';
+            updateWeightsList();
+        });
 
-            // Forzar al navegador a reconocer el estado "oculto" antes de volver a mostrarlo.
-            // void messageElement.offsetWidth; // Truco de Reflow (a veces necesario)
+        resetBtn.addEventListener('click', () => {
+            weightInput.value = '';
+            messageDiv.textContent = '';
+            container.style.display = 'none';
+            textProgress = 0;
+            if (textMesh) textMesh.position.set(-3, 0, -10);
+            updateWeightsList();
+        });
 
-            // 3. Añadir la clase 'visible' para iniciar la animación.
-            // Usamos un pequeño timeout para asegurar que el paso 2 se complete.
-            setTimeout(() => {
-                messageElement.classList.add('visible');
-            }, 10); // Un delay muy corto es usualmente suficiente
+        function updateWeightsList() {
+            const weights = JSON.parse(localStorage.getItem('weights') || '[]');
+            weightsList.innerHTML = weights.map(w => `Peso: ${w.weight} kg`).join('<br>');
         }
+        updateWeightsList();
     </script>
-
 </body>
 </html>
